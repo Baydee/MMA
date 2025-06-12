@@ -11,18 +11,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, Search, Settings, LogOut, User } from "lucide-react";
+import { Bell, Search, Settings, LogOut, User, Menu } from "lucide-react";
 
 interface TopNavigationProps {
   userRole?: "artist" | "manager" | "agent" | "admin";
   userName?: string;
   userAvatar?: string;
+  onMenuClick?: () => void;
 }
 
 const TopNavigation = ({
   userRole = "artist",
   userName = "John Doe",
   userAvatar,
+  onMenuClick,
 }: TopNavigationProps) => {
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
@@ -40,32 +42,43 @@ const TopNavigation = ({
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-3 lg:px-6">
+    <header className="bg-white border-b border-gray-200 px-4 py-3 lg:px-6 sticky top-0 z-40">
       <div className="flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/dashboard" className="flex items-center space-x-3">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white"
-            >
-              <path d="M9 18V5l12-2v13"></path>
-              <circle cx="6" cy="18" r="3"></circle>
-              <circle cx="18" cy="16" r="3"></circle>
-            </svg>
-          </div>
-          <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-            MusicPro
-          </span>
-        </Link>
+        {/* Logo and Mobile Menu */}
+        <div className="flex items-center space-x-3">
+          {/* Mobile menu button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="lg:hidden"
+            onClick={onMenuClick}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+          <Link to="/dashboard" className="flex items-center space-x-3">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-white"
+              >
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              MusicPro
+            </span>
+          </Link>
+        </div>
 
         {/* Search Bar - Hidden on mobile */}
         <div className="hidden md:flex items-center flex-1 max-w-md mx-8">

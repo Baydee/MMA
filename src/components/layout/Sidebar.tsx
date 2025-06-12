@@ -57,7 +57,7 @@ const Sidebar = ({ userRole, isOpen, onClose }: SidebarProps) => {
         },
         {
           path: "/fanmail",
-          name: "Fan Messages",
+          name: "Messages",
           icon: MessageSquare,
           description: "Inbox",
         },
@@ -147,7 +147,7 @@ const Sidebar = ({ userRole, isOpen, onClose }: SidebarProps) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r transform transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r transform transition-transform duration-200 ease-in-out lg:translate-x-0 flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -158,7 +158,7 @@ const Sidebar = ({ userRole, isOpen, onClose }: SidebarProps) => {
           </Button>
         </div>
 
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 flex-1 overflow-y-auto">
           {navigationItems.map((item) => {
             const IconComponent = item.icon;
             const isActive = location.pathname === item.path;
@@ -191,7 +191,7 @@ const Sidebar = ({ userRole, isOpen, onClose }: SidebarProps) => {
         </nav>
 
         {/* Settings at bottom */}
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="p-4 border-t bg-white">
           <Link
             to="/settings"
             className="flex items-center space-x-3 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
