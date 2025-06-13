@@ -42,11 +42,11 @@ import {
 } from "lucide-react";
 
 interface ContractManagementProps {
-  userRole?: "agent" | "manager";
+  userRole?: "manager";
 }
 
 const ContractManagement = ({
-  userRole = "agent",
+  userRole = "manager",
 }: ContractManagementProps) => {
   const [selectedContract, setSelectedContract] = useState<any>(null);
   const [newDealStep, setNewDealStep] = useState(1);

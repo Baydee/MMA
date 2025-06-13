@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 interface SidebarProps {
-  userRole: "artist" | "manager" | "agent" | "admin";
+  userRole: "artist" | "manager";
   isOpen: boolean;
   onClose: () => void;
 }
@@ -86,46 +86,6 @@ const Sidebar = ({ userRole, isOpen, onClose }: SidebarProps) => {
           name: "Messages",
           icon: MessageSquare,
           description: "Communications",
-        },
-      ],
-      agent: [
-        {
-          path: "/deals",
-          name: "Deal Tracker",
-          icon: Briefcase,
-          description: "Contract stages",
-        },
-        {
-          path: "/contracts",
-          name: "Contracts",
-          icon: FileText,
-          description: "Legal docs",
-        },
-        {
-          path: "/clients",
-          name: "Clients",
-          icon: Users,
-          description: "Artist roster",
-        },
-      ],
-      admin: [
-        {
-          path: "/users",
-          name: "User Management",
-          icon: Users,
-          description: "Platform users",
-        },
-        {
-          path: "/moderation",
-          name: "Moderation",
-          icon: Shield,
-          description: "Content review",
-        },
-        {
-          path: "/reports",
-          name: "Reports",
-          icon: FileText,
-          description: "System reports",
         },
       ],
     };

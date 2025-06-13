@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 
 interface SettingsPageProps {
-  userRole?: "artist" | "manager" | "agent" | "admin";
+  userRole?: "artist" | "manager";
 }
 
 const SettingsPage = ({ userRole = "artist" }: SettingsPageProps) => {

@@ -27,7 +27,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 interface AnalyticsDashboardProps {
-  userRole?: "artist" | "manager" | "agent" | "admin";
+  userRole?: "artist" | "manager";
 }
 
 const AnalyticsDashboard = ({
@@ -149,9 +149,6 @@ const AnalyticsDashboard = ({
           <TabsTrigger value="royalties">Royalties</TabsTrigger>
           <TabsTrigger value="geographic">Geographic</TabsTrigger>
           <TabsTrigger value="audience">Audience</TabsTrigger>
-          {userRole === "admin" && (
-            <TabsTrigger value="platform">Platform</TabsTrigger>
-          )}
         </TabsList>
 
         <TabsContent value="streaming" className="space-y-4">
@@ -680,72 +677,6 @@ const AnalyticsDashboard = ({
             </CardContent>
           </Card>
         </TabsContent>
-
-        {userRole === "admin" && (
-          <TabsContent value="platform" className="space-y-4">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="lg:col-span-2">
-                <CardHeader>
-                  <CardTitle>Platform Usage</CardTitle>
-                  <CardDescription>
-                    Active users and engagement metrics
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[300px] flex items-center justify-center bg-muted/20 rounded-md">
-                    {/* Placeholder for platform usage chart */}
-                    <p className="text-muted-foreground">
-                      Platform usage chart
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>User Distribution</CardTitle>
-                  <CardDescription>Users by role</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[300px] flex items-center justify-center bg-muted/20 rounded-md mb-4">
-                    {/* Placeholder for pie chart */}
-                    <PieChart className="h-16 w-16 text-muted-foreground" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span>Artists</span>
-                      </div>
-                      <span className="font-medium">45%</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                        <span>Managers</span>
-                      </div>
-                      <span className="font-medium">28%</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span>Agents</span>
-                      </div>
-                      <span className="font-medium">22%</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <span>Admins</span>
-                      </div>
-                      <span className="font-medium">5%</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        )}
       </Tabs>
     </div>
   );

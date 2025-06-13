@@ -1,6 +1,8 @@
-import { Suspense, useState } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
+import { Suspense, useState, useEffect } from "react";
+import { useRoutes, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./components/home";
+import RoleSelectionLanding from "./components/RoleSelectionLanding";
+import FanLanding from "./components/FanLanding";
 import AuthForm from "./components/auth/AuthForm";
 import AnalyticsDashboard from "./components/dashboard/AnalyticsDashboard";
 import CalendarView from "./components/dashboard/CalendarView";
@@ -18,7 +20,7 @@ import routes from "tempo-routes";
 
 // Mock user data - in real app this would come from auth context
 const mockUser = {
-  role: "artist" as "artist" | "manager" | "agent" | "admin",
+  role: "artist" as "artist" | "manager",
   name: "Alex Rivera",
   avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
   isAuthenticated: true,
@@ -26,7 +28,20 @@ const mockUser = {
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentUser] = useState(mockUser);
+  const [currentUser, setCurrentUser] = useState(mockUser);
+  const location = useLocation();
+
+  // Check for role parameter in URL and update user role
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const roleParam = urlParams.get("role");
+    if (roleParam && (roleParam === "artist" || roleParam === "manager")) {
+      setCurrentUser((prev) => ({
+        ...prev,
+        role: roleParam as "artist" | "manager",
+      }));
+    }
+  }, [location.search]);
 
   // Routes that don't need the dashboard layout
   const publicRoutes = ["/", "/login", "/register"];
@@ -59,10 +74,6 @@ function App() {
         return <ArtistDashboard />;
       case "manager":
         return <ManagerDashboard />;
-      case "agent":
-        return <ArtistDashboard />; // Placeholder - will create AgentDashboard later
-      case "admin":
-        return <ArtistDashboard />; // Placeholder - will create AdminDashboard later
       default:
         return <ArtistDashboard />;
     }
@@ -72,7 +83,9 @@ function App() {
     <Suspense fallback={<p>Loading...</p>}>
       <>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<RoleSelectionLanding />} />
+          <Route path="/professional" element={<Home />} />
+          <Route path="/fan" element={<FanLanding />} />
           <Route path="/login" element={<AuthForm />} />
           <Route path="/register" element={<AuthForm />} />
           <Route

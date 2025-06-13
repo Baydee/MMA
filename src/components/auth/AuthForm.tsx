@@ -104,7 +104,11 @@ const AuthForm = () => {
     // Handle registration logic here
     setError(null);
     // Redirect to role-based dashboard after successful registration
-    navigate("/dashboard");
+    if (data.role === "manager") {
+      navigate("/dashboard?role=manager");
+    } else {
+      navigate("/dashboard?role=artist");
+    }
   };
 
   const onResetSubmit = (data: ResetFormValues) => {
@@ -362,8 +366,6 @@ const AuthForm = () => {
                       <SelectContent>
                         <SelectItem value="artist">Artist</SelectItem>
                         <SelectItem value="manager">Manager</SelectItem>
-                        <SelectItem value="agent">Agent</SelectItem>
-                        <SelectItem value="admin">Admin</SelectItem>
                       </SelectContent>
                     </Select>
                     {registerForm.formState.errors.role && (
